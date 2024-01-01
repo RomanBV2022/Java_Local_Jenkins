@@ -12,13 +12,13 @@ import school.redrover.model.jobs.configs.*;
 
 public class NewItemPage extends BasePage<NewItemPage> {
 
-    @FindBy(name = "name")
+    @FindBy(id = "name")
     private WebElement inputName;
 
-    @FindBy(id = "ok-button")
+    @FindBy(xpath = "//button[@id = 'ok-button']")
     private WebElement okButton;
 
-    @FindBy(xpath = "//li[@class = 'hudson_model_FreeStyleProject']")
+    @FindBy(xpath = "//li[@class='hudson_model_FreeStyleProject']")
     private WebElement freeStyleProject;
 
     @FindBy(xpath = "//li[contains(@class, 'org_jenkinsci_plugins_workflow_job_WorkflowJob')]")
