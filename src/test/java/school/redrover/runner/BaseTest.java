@@ -102,6 +102,7 @@ public abstract class BaseTest {
 
     @AfterMethod
     protected void afterMethod(Method method, ITestResult testResult) {
+        closeDriver();
         if (ProjectUtils.isServerRun() && !testResult.isSuccess()) {
             ProjectUtils.takeScreenshot(driver, method.getName(), this.getClass().getName());
         }
