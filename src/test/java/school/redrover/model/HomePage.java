@@ -77,6 +77,8 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(css = "a[href = 'api/']")
     private WebElement restApiButton;
 
+
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -244,4 +246,6 @@ public class HomePage extends BasePage<HomePage> {
 
         return listOfViews.stream().anyMatch(element -> element.getText().contains(viewName));
     }
+
+
 }
