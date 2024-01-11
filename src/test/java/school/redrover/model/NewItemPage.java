@@ -51,6 +51,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     @FindBy(xpath = "//input[@id='from']")
     private WebElement fieldCopyFrom;
 
+
     public NewItemPage(WebDriver driver) {
         super(driver);
     }
@@ -193,3 +194,5 @@ public class NewItemPage extends BasePage<NewItemPage> {
         return requiredNameErrorMessage.getCssValue("color");
     }
 }
+
+
