@@ -36,9 +36,6 @@ jobs:
           chmod -R 777 ./jenkins_backup/var/jenkins_home
 
 
-      - name: Wait for the Jenkins
-        run: ./.github/wait-for-jenkins.sh
-
       - name: Maven test
         run: mvn test
         env:
