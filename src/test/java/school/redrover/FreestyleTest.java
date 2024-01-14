@@ -1,16 +1,12 @@
 package school.redrover;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.model.HomePage;
-import school.redrover.model.RenamePage;
-import school.redrover.model.base.BaseDetailsPage;
-import school.redrover.model.base.BasePage;
 import school.redrover.model.jobs.configs.FreestyleProjectConfigurePage;
-import school.redrover.model.jobs.details.FolderDetailsPage;
 import school.redrover.model.jobs.details.FreestyleProjectDetailsPage;
 import school.redrover.runner.BaseTest;
+
 
 public class FreestyleTest extends BaseTest {
     private static final String PROJECT_NAME = "ProjectName";
@@ -61,9 +57,21 @@ public class FreestyleTest extends BaseTest {
 
         Assert.assertEquals(homePage, true);
 
-
-
     }
 
+    @Test
+    public void testDeleteFreestyleProject() {
+        boolean projectExist = new HomePage(getDriver())
+                .clickNewItem()
+                .createFreestyleProject("other" + PROJECT_NAME)
+                .clickSaveButton()
+                .goHomePage()
+                .clickJobByName("other" + PROJECT_NAME, new FreestyleProjectDetailsPage(getDriver()))
+                .deleteProject()
+                .goHomePage()
+                .isProjectExist("other" + PROJECT_NAME);
+
+        Assert.assertEquals(projectExist, false);
+    }
 
 }
