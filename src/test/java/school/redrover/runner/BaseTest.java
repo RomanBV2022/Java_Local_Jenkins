@@ -102,8 +102,8 @@ public abstract class BaseTest {
 
     @AfterMethod
     protected void afterMethod(Method method, ITestResult testResult) {
-              if (ProjectUtils.isServerRun() && !testResult.isSuccess()) {
-            ProjectUtils.takeScreenshot(driver, method.getName(), this.getClass().getName());
+        if (!testResult.isSuccess() && ProjectUtils.isServerRun()) {
+            ProjectUtils.takeScreenshot(getDriver(), testResult);
         }
 
         if (methodsOrder.isGroupFinished(method) && !(!ProjectUtils.isServerRun() && !testResult.isSuccess() && !ProjectUtils.closeBrowserIfError())) {

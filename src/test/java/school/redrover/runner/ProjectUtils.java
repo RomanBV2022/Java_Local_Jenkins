@@ -1,18 +1,20 @@
 package school.redrover.runner;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -74,7 +76,7 @@ public final class ProjectUtils {
             }
         }
 
-        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().setup();
     }
 
     static boolean isServerRun() {
@@ -125,14 +127,14 @@ public final class ProjectUtils {
         System.out.printf(str, arr);
         System.out.println();
     }
-
-    static File takeScreenshot(WebDriver driver, String methodName, String className) {
-        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    static void takeScreenshot(WebDriver driver, ITestResult testResult) {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(file, new File(String.format("screenshots/%s.%s.png", className, methodName)));
+            Files.createDirectories(Paths.get("screenshots"));
+            FileHandler.copy(screenshot, new File("screenshots/" + testResult.getInstanceName() + "." + testResult.getName() + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return file;
     }
+
 }
